@@ -17,9 +17,17 @@
       let
         pkgs = import nixpkgs { inherit system; };
         defaultNix = (import ./. { inherit pkgs; });
+        flakePackages = pkgs.lib.filterAttrs (name: p: pkgs.lib.isDerivation p) defaultNix;
       in
       {
-        packages = pkgs.lib.filterAttrs (name: p: pkgs.lib.isDerivation p) defaultNix;
+        packages =
+          if system != "x86_64-linux" then
+            pkgs.lib.mapAttrs (
+              name: p:
+              pkgs.lib.warn "dtomvan/nur-packages: only x86_64-linux builds are tested, use at own risk" p
+            ) flakePackages
+          else
+            flakePackages;
         formatter = pkgs.nixfmt-tree;
         # doesn't work like a check because those are builds and are sandboxed
         # why must flake apps be this way?
