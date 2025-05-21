@@ -20,6 +20,7 @@
       in
       {
         packages = pkgs.lib.filterAttrs (name: p: pkgs.lib.isDerivation p) defaultNix;
+        formatter = pkgs.nixfmt-tree;
       }
     );
 }
