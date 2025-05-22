@@ -1,30 +1,85 @@
 {
   lib,
   stdenv,
-  fetchzip,
+  fetchFromGitHub,
+  iosevka,
+  ttfautohint-nox,
+  fontforge,
+  python3,
+  nodejs,
+  npmHooks,
+  fetchNpmDeps,
 }:
 let
   version = "0.0.13";
+  afioHash = "sha256-jBdYFcSu0kbcaVG8cMbtKw4qP+6snQirOEu7RYBBbc4=";
   isRc = true;
   versionTag = "v${version}${if isRc then "-rc" else ""}";
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "afio-font";
   inherit version;
 
-  src = fetchzip {
-    url = "${meta.homepage}/releases/download/${versionTag}/afio-v${version}.zip";
-    hash = "sha256-9CU9zwxure1XvKdqqX/WSx3IHWtntlyAq7Zrlwxla2o=";
-    stripRoot = false;
+  src = fetchFromGitHub {
+    owner = "awnion";
+    repo = "custom-iosevka-nerd-font";
+    rev = "${versionTag}";
+    hash = afioHash;
   };
 
-  sourceRoot = ".";
+  nativeBuildInputs = [
+    (python3.withPackages (p: [ p.fontforge ]))
+    fontforge
+    ttfautohint-nox
+    nodejs
+  ];
+
+  npmDeps = fetchNpmDeps {
+    src = "${iosevka.src}";
+    hash = iosevka.npmDepsHash;
+  };
+
+  configurePhase = ''
+    runHook preConfigure
+
+    export BUILD_DIR=build
+    export OUTPUT_DIR=out
+    export FONT_NAME=afio
+
+    mkdir $BUILD_DIR $OUTPUT_DIR
+
+    cp -r ${iosevka.src} $BUILD_DIR/iosevka
+    chmod -R +w $BUILD_DIR/iosevka
+    cp private-build-plans.toml $BUILD_DIR/iosevka
+
+    source ${npmHooks.npmConfigHook}/nix-support/setup-hook
+    npmRoot=$BUILD_DIR/iosevka npmConfigHook
+
+    mv nerd/font-patcher .
+    mv nerd/glyphs src
+
+    chmod +x font-patcher
+    patchShebangs .
+
+    runHook postConfigure
+  '';
+
+  buildPhase = ''
+    runHook preBuild
+
+    pushd $BUILD_DIR/iosevka
+      npm run build -- ttf::afio
+    popd
+
+    python3 src/docker_run.py
+
+    runHook postBuild
+  '';
 
   installPhase = ''
     runHook preInstall
 
-    dst_truetype=$out/share/fonts/truetype/afio/
-    find -name \*.ttf -exec mkdir -p $dst_truetype \; -exec cp -vp {} $dst_truetype \;
+    install -Dm644 $OUTPUT_DIR/*.ttf -t $out/share/fonts/truetype/afio
 
     runHook postInstall
   '';
@@ -39,6 +94,5 @@ stdenv.mkDerivation rec {
     license = "unfree";
     platform = lib.platforms.all;
     maintainers = with lib.maintainers; [ dtomvan ];
-    sourceProvenance = with lib.sourceTypes; [ binaryBytecode ];
   };
-}
+})
