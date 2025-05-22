@@ -36,5 +36,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/awnion/custom-iosevka-nerd-font";
     platform = lib.platforms.all;
     maintainers = with lib.maintainers; [ dtomvan ];
+    sourceProvenance = with lib.sourceTypes; [ binaryBytecode ];
   };
 }
