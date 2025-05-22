@@ -9,13 +9,13 @@
 let
   xpifile = buildNpmPackage (finalAttrs: {
     pname = "steam-database";
-    version = "4.15";
+    version = "4.16";
 
     src = fetchFromGitHub {
       owner = "SteamDatabase";
       repo = "BrowserExtension";
       rev = "v${finalAttrs.version}";
-      hash = "sha256-zNMKcSawF3ltIsDexRnrqr5ZSDNfCDQNPcl/dtdhl/c=";
+      hash = "sha256-3KaR05guZGi+P5cgCJDiZP8GpF6N4w68TSaP83KQn+g=";
     };
 
     npmDepsHash = "sha256-wFIwbzsd/i6vHkeM1T9ffkZLzOdY0XVuTEP8KyxSXX4=";

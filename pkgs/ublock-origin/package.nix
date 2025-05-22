@@ -24,13 +24,13 @@ let
   };
   xpifile = stdenv.mkDerivation (finalAttrs: {
     pname = "ublock-origin";
-    version = "1.63.2";
+    version = "1.64.1b0";
 
     src = fetchFromGitHub {
       owner = "gorhill";
       repo = "uBlock";
       tag = finalAttrs.version;
-      hash = "sha256-H6zTFNEAe6R2E23jPlYRmV/vSHDlOMO9HqY05vlRZMg=";
+      hash = "sha256-byYEhrUN6mLpbqNCpm2tUcB/6ftO2hvqAhJ1MQ2xGBY=";
     };
 
     postPatch = ''

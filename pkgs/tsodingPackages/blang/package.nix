@@ -11,13 +11,13 @@
 clangStdenv.mkDerivation {
   # TODO: when Tsoding starts building with nob, use buildNobPackage
   pname = "b";
-  version = "0-unstable-2025-05-11";
+  version = "0-unstable-2025-05-22";
 
   src = fetchFromGitHub {
     owner = "tsoding";
     repo = "b";
-    rev = "6f3d5eb446c799fc0a71bac01a7293443dc57e33";
-    hash = "sha256-vawrRg1i5F3yMyFAukN9EWPhWudyEMCQZkwz1Q/STF8=";
+    rev = "669eea594e680b4509a0e36f373d3d0c55af6543";
+    hash = "sha256-PMh1z4Ndy/0KlfL8OHx+94NVjTJ6xednUaAxQV87Gd0=";
   };
 
   patches = [
