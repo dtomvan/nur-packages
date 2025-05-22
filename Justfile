@@ -3,7 +3,7 @@ alias check := default
 default: check-flake check-nur-eval check-formatting build-test
 
 check-flake:
-    nix flake check
+    nix flake check -L
 
 check-nur-eval:
     nix run .#check-nur-eval
