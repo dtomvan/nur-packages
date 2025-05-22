@@ -95,5 +95,6 @@ buildNpmPackage {
     description = "Online Multiplayer Browser Game with Old-School Raycasting Graphics";
     homepage = "https://github.com/tsoding/koil";
     licenses = lib.licenses.mit;
+    mainProgram = "koil-serve";
   };
 }

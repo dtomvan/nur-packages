@@ -23,5 +23,6 @@ buildGoModule {
     description = "Autocut the Twitch VODs based on a Marker file";
     homepage = "https://github.com/tsoding/markut";
     license = lib.licenses.mit;
+    mainProgram = "markut";
   };
 }

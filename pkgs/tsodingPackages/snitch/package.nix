@@ -23,5 +23,6 @@ buildGoModule {
     description = "Finds TODOs in source code and reports them as issues";
     homepage = "https://github.com/tsoding/snitch";
     license = lib.licenses.mit;
+    mainProgram = "snitch";
   };
 }

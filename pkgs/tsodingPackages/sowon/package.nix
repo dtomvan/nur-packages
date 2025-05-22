@@ -28,5 +28,6 @@ stdenv.mkDerivation {
     description = "Starting Soon Timer for Tsoding Streams";
     homepage = "https://github.com/tsoding/sowon";
     license = lib.licenses.mit;
+    mainProgram = "sowon";
   };
 }

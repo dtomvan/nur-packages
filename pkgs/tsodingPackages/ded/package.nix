@@ -48,5 +48,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Music Visualizer";
     homepage = "https://github.com/tsoding/musializer";
     license = lib.licenses.mit;
+    mainProgram = "ded";
   };
 })

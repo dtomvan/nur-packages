@@ -53,5 +53,6 @@ stdenv.mkDerivation {
     homepage = "https://gitlab.com/tsoding/porth";
     license = lib.licenses.mit;
     platforms = [ "x86_64-linux" ];
+    mainProgram = "porth";
   };
 }

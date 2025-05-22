@@ -45,5 +45,6 @@ buildNimPackage (finalAttrs: {
     description = "Zoomer application for Linux";
     homepage = "https://github.com/tsoding/boomer";
     license = lib.licenses.mit;
+    mainProgram = "boomer";
   };
 })
