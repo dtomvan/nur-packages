@@ -14,6 +14,7 @@ check-formatting:
 # TODO: in CI, only rebuild the package that changed
 # this doesn't have a lot of packages right now so should be fine
 build-test:
+    #!/usr/bin/env bash
     if [ -z "$CI" ]; then
         nix shell nixpkgs#nix-output-monitor --command nom-build ci.nix -A buildPkgs
     else
