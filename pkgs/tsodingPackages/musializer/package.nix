@@ -15,13 +15,13 @@
 }:
 (buildNobPackage rec {
   pname = "musializer";
-  version = "alpha2-unstable-2025-04-14";
+  version = "alpha2-unstable-2025-05-16";
 
   src = fetchFromGitHub {
     owner = "tsoding";
     repo = "musializer";
-    rev = "b7578cc76b9ecb573d239acc9ccf5a04d3aba2c9";
-    hash = "sha256-NbumChMDzh3kVi8q2Bhk91D6L9ckfqFncrwN0D5GA6w=";
+    rev = "332a173d3010c5e6bb0c883cd32bc0b6e5c3451f";
+    hash = "sha256-UI5jkiBDeYgYwsDdnE5xg17N4FLjL7o8CeGtypXL/98=";
   };
 
   desktopItems = [
