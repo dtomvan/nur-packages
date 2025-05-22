@@ -12,4 +12,8 @@ check-formatting:
     nix fmt -- --ci
 
 build-test:
-    nix shell nixpkgs#nix-output-monitor --command nom-build ci.nix -A buildPkgs
+    if [ -z "$CI" ]; then
+        nix shell nixpkgs#nix-output-monitor --command nom-build ci.nix -A buildPkgs
+    else
+        nix-build ci.nix -A buildPkgs
+    fi
