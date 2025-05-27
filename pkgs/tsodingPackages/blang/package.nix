@@ -7,6 +7,7 @@
   fasm,
   nob_h,
   nix-update-script,
+  makeWrapper,
 }:
 clangStdenv.mkDerivation {
   # TODO: when Tsoding starts building with nob, use buildNobPackage
@@ -30,7 +31,7 @@ clangStdenv.mkDerivation {
 
   nativeBuildInputs = [
     rustc
-    fasm
+    makeWrapper
   ];
 
   installPhase = ''
@@ -39,6 +40,9 @@ clangStdenv.mkDerivation {
     mkdir -p $out/bin
     cp build/b $out/bin
     install -Dm444 examples/*.b -t $out/opt/b
+
+    wrapProgram $out/bin/b \
+      --prefix PATH : "${lib.makeBinPath [ fasm ]}"
 
     runHook postInstall
   '';
