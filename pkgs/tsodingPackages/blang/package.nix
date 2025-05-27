@@ -36,10 +36,9 @@ clangStdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/bin $out/opt/b/examples
+    mkdir -p $out/bin
     cp build/b $out/bin
-    # removed (temporarily?)
-    # cp build/{hello.js,hello} index.html $out/opt/b/examples
+    install -Dm444 examples/*.b -t $out/opt/b
 
     runHook postInstall
   '';
