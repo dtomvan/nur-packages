@@ -15,7 +15,7 @@
 
 with builtins;
 let
-  flattenPkgs = import lib/flatten.nix;
+  flattenPkgs = import lib/flatten.nix { inherit pkgs; };
   isReserved = n: n == "lib" || n == "overlays" || n == "modules";
   isBuildable =
     p:
@@ -37,9 +37,12 @@ let
 
   nurAttrs = import ./default.nix { inherit pkgs; };
 
-  nurPkgs = flattenPkgs (
-    listToAttrs (
-      map (n: nameValuePair n nurAttrs.${n}) (filter (n: !isReserved n) (attrNames nurAttrs))
+  # TODO: could be more succinct
+  nurPkgs = pkgs.lib.attrsToList (
+    flattenPkgs (
+      listToAttrs (
+        map (n: nameValuePair n nurAttrs.${n}) (filter (n: !isReserved n) (attrNames nurAttrs))
+      )
     )
   );
 in
