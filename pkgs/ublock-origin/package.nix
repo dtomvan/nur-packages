@@ -73,6 +73,10 @@ buildFirefoxXpiAddon {
 
   src = xpifile;
 
+  passthru = {
+    inherit uAssets uProd;
+  };
+
   meta = {
     description = "UBlock Origin - An efficient blocker for Chromium and Firefox. Fast and lean";
     homepage = "https://github.com/gorhill/uBlock";
