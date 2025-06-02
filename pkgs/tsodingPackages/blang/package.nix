@@ -40,9 +40,9 @@ clangStdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/bin
+    mkdir -p $out/bin $out/opt/b/
     cp build/b $out/bin
-    install -Dm444 examples/*.b -t $out/opt/b
+    cp -r examples $out/opt/b
 
     wrapProgram $out/bin/b \
       --prefix PATH : "${lib.makeBinPath runtimeDeps}"
