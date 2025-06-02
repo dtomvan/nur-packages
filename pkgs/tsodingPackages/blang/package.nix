@@ -1,14 +1,19 @@
 {
   clangStdenv,
   lib,
+  rustc,
+  nob_h,
+
   replaceVars,
   fetchFromGitHub,
-  rustc,
-  fasm,
-  nob_h,
   nix-update-script,
   makeWrapper,
+
+  fasm,
 }:
+let
+  runtimeDeps = [ fasm ];
+in
 clangStdenv.mkDerivation {
   # TODO: when Tsoding starts building with nob, use buildNobPackage
   pname = "b";
@@ -42,7 +47,7 @@ clangStdenv.mkDerivation {
     install -Dm444 examples/*.b -t $out/opt/b
 
     wrapProgram $out/bin/b \
-      --prefix PATH : "${lib.makeBinPath [ fasm ]}"
+      --prefix PATH : "${lib.makeBinPath runtimeDeps}"
 
     runHook postInstall
   '';
