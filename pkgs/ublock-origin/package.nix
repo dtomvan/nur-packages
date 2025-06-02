@@ -10,20 +10,9 @@
   nix-update-script,
 }:
 let
-  uAssets = fetchFromGitHub {
-    owner = "ublockorigin";
-    repo = "uAssets";
-    rev = "78372c673c25a0df4edf9d77846893280a7cd6e0";
-    hash = "sha256-uPQomlwgJphEq5yheCfUMjyNBIBVUJVP4Heo7gw+JiM=";
-    passthru.updateScript = nix-update-script { extraArgs = [ "--version=branch" ]; };
-  };
-  uProd = fetchFromGitHub {
-    owner = "ublockorigin";
-    repo = "uAssets";
-    rev = "d40038fc816d1403cde41ca234d2349fd0a1bc73";
-    hash = "sha256-Dwt6th0QCHmWIHtXgl+5sLSXhGSLJUpeTB52w5jdPew=";
-    passthru.updateScript = nix-update-script { extraArgs = [ "--version=branch=gh-pages" ]; };
-  };
+  uAssets = callPackage ./uAssets.nix { };
+  uProd = callPackage ./uProd.nix { };
+
   xpifile = stdenv.mkDerivation (finalAttrs: {
     pname = "ublock-origin";
     version = "1.64.1b0";
