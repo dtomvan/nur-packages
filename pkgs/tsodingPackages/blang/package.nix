@@ -2,9 +2,7 @@
   clangStdenv,
   lib,
   rustc,
-  nob_h,
 
-  replaceVars,
   fetchFromGitHub,
   nix-update-script,
   makeWrapper,
@@ -30,14 +28,6 @@ clangStdenv.mkDerivation {
     rev = "aa97e2ec480bb62cad7b005a047db3df9da02852";
     hash = "sha256-oZFzI84lhFxpWeY7cGULaGu7zfzdBBxhBC8RmoQg5Xs=";
   };
-
-  patches = [
-    (replaceVars ./use-nix-nob.patch {
-      NOB_H = "${nob_h}/include/nob.h";
-    })
-  ];
-
-  postPatch = "rm thirdparty/nob.h";
 
   nativeBuildInputs = [
     rustc
