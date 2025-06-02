@@ -34,6 +34,9 @@ clangStdenv.mkDerivation {
     makeWrapper
   ];
 
+  doCheck = true;
+  nativeCheckInputs = runtimeDeps;
+
   installPhase = ''
     runHook preInstall
 
