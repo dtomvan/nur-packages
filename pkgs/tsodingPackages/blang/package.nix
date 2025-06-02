@@ -10,9 +10,14 @@
   makeWrapper,
 
   fasm,
+  uxn,
+  binutils,
 }:
 let
-  runtimeDeps = [ fasm ];
+  runtimeDeps = [
+    fasm
+    uxn
+  ] ++ lib.optionals (clangStdenv.hostPlatform.system == "aarch64-linux") [ binutils ];
 in
 clangStdenv.mkDerivation {
   # TODO: when Tsoding starts building with nob, use buildNobPackage
