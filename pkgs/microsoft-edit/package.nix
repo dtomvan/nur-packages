@@ -35,8 +35,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   useFetchCargoVendor = true;
   cargoHash = "sha256-qT4u8LuKX/QbZojNDoK43cRnxXwMjvEwybeuZIK6DQQ=";
-  # Requires nightly features
-  env.RUSTC_BOOTSTRAP = 1;
 
   # dtomvan 2025-06-05:
   # I am not interested I want this NOW
