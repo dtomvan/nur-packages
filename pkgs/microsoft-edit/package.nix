@@ -8,6 +8,8 @@
   fetchFromGitHub,
   versionCheckHook,
   nix-update-script,
+  makeWrapper,
+  icu,
 }:
 # cursed to avoid flakes/npins/whatever
 let
@@ -45,6 +47,15 @@ rustPlatform.buildRustPackage (finalAttrs: {
   nativeInstallCheckInputs = [ versionCheckHook ];
   versionCheckProgram = "${placeholder "out"}/bin/edit";
   versionCheckProgramArg = "--version";
+
+  nativeBuildInputs = [
+    makeWrapper
+  ];
+
+  postInstall = ''
+    wrapProgram $out/bin/edit \
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ icu ]}
+  '';
 
   passthru.updateScript = nix-update-script { };
 
