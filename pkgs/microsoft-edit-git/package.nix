@@ -12,9 +12,11 @@
 }:
 # cursed to avoid flakes/npins/whatever
 let
-  fenix = builtins.fetchTarball {
-    url = "https://github.com/nix-community/fenix/tarball/9be40ad995bac282160ff374a47eed67c74f9c2a"; # monthly June 2025
-    sha256 = "sha256:1jbr9d8cz0mvyjbw3k5wcj89drpxz9xv3slxzxli8vq03c8634rh";
+  fenix = fetchFromGitHub {
+    owner = "nix-community";
+    repo = "fenix";
+    rev = "9be40ad995bac282160ff374a47eed67c74f9c2a"; # June 2025
+    hash = "sha256-MJNhEBsAbxRp/53qsXv6/eaWkGS8zMGX9LuCz1BLeck=";
   };
   toolchain = (import fenix { inherit pkgs; }).minimal;
   rustPlatform = makeRustPlatform {
