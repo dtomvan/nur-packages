@@ -61,7 +61,9 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    install -Dm644 dist/${distName}/TTF/*.ttf -t $out/share/fonts/truetype/${distName}
+    pushd $npmRoot
+      install -Dm644 dist/${distName}/TTF/*.ttf -t $out/share/fonts/truetype/${distName}
+    popd
 
     runHook postInstall
   '';
