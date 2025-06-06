@@ -18,6 +18,7 @@ jobs:
       # TODO: loop or something
       - name: update microsoft-edit-git
         run: |
+          nix profile install nixpkgs#nixfmt-rfc-style
           yes $'\n' | nix run nixpkgs#nix-update -- -u microsoft-edit-git --format --commit
       - name: rebase master if needed
         run: |
