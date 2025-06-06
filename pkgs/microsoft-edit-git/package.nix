@@ -25,13 +25,13 @@ let
 in
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "microsoft-edit";
-  version = "1.1.0-unstable-2025-06-04";
+  version = "1.1.0-unstable-2025-06-05";
 
   src = fetchFromGitHub {
     owner = "microsoft";
     repo = "edit";
-    rev = "f8bea2be191d00baa2a4551817541ea3f8c5b03e";
-    hash = "sha256-rG5oLuaipHoXMQTTUr6CLj1qjPSdqag+AMWx37+4JMg=";
+    rev = "5c5471e9443353b0f60c5380e515c4559e0316b1";
+    hash = "sha256-dute8vMDR5MCZ8NVpkzMbm29+KLQIGEsNH4Eblqblr4=";
   };
 
   useFetchCargoVendor = true;
