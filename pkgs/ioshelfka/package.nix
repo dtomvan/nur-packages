@@ -9,6 +9,7 @@
   remarshal,
   ttfautohint-nox,
   nerd-font-patcher,
+  parallel,
 }:
 let
   distName = "IoshelfkaMono";
@@ -43,6 +44,7 @@ stdenv.mkDerivation (finalAttrs: {
     remarshal
     ttfautohint-nox
     nerd-font-patcher
+    parallel
   ];
 
   buildPhase = ''
@@ -50,9 +52,9 @@ stdenv.mkDerivation (finalAttrs: {
 
     pushd $npmRoot
       npm run build -- ttf::${distName} --jCmd=$NIX_BUILD_CORES
-      for ttf_file in dist/${distName}/TTF/*.ttf; do
-        nerd-font-patcher "$ttf_file" --complete --no-progressbars
-      done
+      ls -1 dist/${distName}/TTF/*.ttf \
+        | parallel --jobs=$NIX_BUILD_CORES \ 
+          nerd-font-patcher {} --complete --no-progressbars
     popd
 
     runHook postBuild
