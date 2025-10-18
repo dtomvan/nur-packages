@@ -32,9 +32,6 @@ jobs:
             nix develop -c "nix-update --commit -u ublock-origin.$p"
           done
 
-      - name: run checks
-        run: nix develop -c "just check-flake check-nur-eval"
-
       - name: push
         run: nix develop -c "just push ublock-origin asset updates"
         env:

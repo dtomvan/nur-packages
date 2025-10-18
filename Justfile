@@ -1,6 +1,6 @@
-alias check := default
+default: check build-test
 
-default: check-flake check-nur-eval build-test
+check: check-flake check-nur-eval
 
 check-flake:
     nix flake check -L
