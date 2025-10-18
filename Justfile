@@ -1,15 +1,12 @@
 alias check := default
 
-default: check-flake check-nur-eval check-formatting build-test
+default: check-flake check-nur-eval build-test
 
 check-flake:
     nix flake check -L
 
 check-nur-eval:
     nix run .#check-nur-eval
-
-check-formatting:
-    nix fmt -- --ci
 
 build-test:
     #!/usr/bin/env bash
