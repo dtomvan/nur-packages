@@ -8,6 +8,7 @@
 
   alsa-lib,
   dbus,
+  fontconfig,
   glfw3-minecraft,
   libGL,
   libX11,
@@ -17,6 +18,7 @@
   libXxf86vm,
   libjack2,
   libpulseaudio,
+  libseccomp,
   libxcb,
   libxkbcommon,
   openal,
@@ -83,13 +85,13 @@ in
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "pandora-launcher";
-  version = "3.2.1";
+  version = "5.0.0";
 
   src = fetchFromGitHub {
     owner = "Moulberry";
     repo = "PandoraLauncher";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-elPKbnnjrNakZhCl34qz7bW5PEkjSKs3v1IaZEVB64w=";
+    hash = "sha256-6wBTF485iv4ve+YbLopuW0+sFQ5DR9FWzDedephfytw=";
   };
 
   nativeBuildInputs = [
@@ -100,11 +102,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
   ];
 
   buildInputs = [
+    fontconfig
     openssl
   ]
   ++ lib.optionals stdenv.hostPlatform.isLinux [
     alsa-lib
     dbus
+    libseccomp
     libxcb
     libxkbcommon
     wayland
@@ -119,7 +123,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
     OPENSSL_NO_VENDOR = true;
   };
 
-  cargoHash = "sha256-jxJXEgZbLIcZizokJhaTcEfGt+KHclbQ+uZVdEF+hnQ=";
+  dontUpdateAutotoolsGnuConfigScripts = true; # will modify vendor dir, which cargo doesn't allow
+  cargoVendorDir = "vendor"; # everything is vendored
+  dontCargoSetupPostUnpack = true;
 
   doCheck = false;
 
@@ -145,6 +151,5 @@ rustPlatform.buildRustPackage (finalAttrs: {
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ dtomvan ];
     mainProgram = "pandora_launcher";
-    broken = true;
   };
 })
