@@ -9,13 +9,13 @@
 let
   xpifile = buildNpmPackage (finalAttrs: {
     pname = "darkreader";
-    version = "4.9.119";
+    version = "4.9.127";
 
     src = fetchFromGitHub {
       owner = "darkreader";
       repo = "darkreader";
       rev = "v${finalAttrs.version}";
-      hash = "sha256-lrCrR30BeZuUcvmSfLagaWftMkd96YrS41KbX48xdeo=";
+      hash = "sha256-UkVo6GSyGV3U2nn5+IaPdYXqrYh0VgiQx3SApDoI574=";
     };
 
     postPatch = ''
