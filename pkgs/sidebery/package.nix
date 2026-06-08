@@ -9,16 +9,16 @@
 let
   xpifile = buildNpmPackage (finalAttrs: {
     pname = "sidebery";
-    version = "5.5.0";
+    version = "5.5.2";
 
     src = fetchFromGitHub {
       owner = "mbnuqw";
       repo = "sidebery";
       rev = "v${finalAttrs.version}";
-      hash = "sha256-u3LDhDobYBTKZVdR9YpNHHE/YuHPmv1LnEzkAQNjRuY=";
+      hash = "sha256-V77H6DfLW1Xy3kdjtCSTptfagxo0A6Syv+c3Zm3fJvc=";
     };
 
-    npmDepsHash = "sha256-ZoDR3RQ5VXsaayD50H494M/IfDrD6R3+w9m7RXVBiAo=";
+    npmDepsHash = "sha256-3EyPq9iFh2eidsRMCU4EUpL0ezRASFEJ7jBtvEMcg3M=";
 
     buildPhase = ''
       runHook preBuild
