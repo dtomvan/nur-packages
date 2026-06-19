@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "bart": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1781706227,
-        "narHash": "sha256-KZYEDtNPps98WZg73ZUTr796tEwoVnCkyjDWypSOtuA=",
-        "owner": "bartoostveen",
-        "repo": "infra",
-        "rev": "426223607556dc658e8032f04f02ad4c608eb370",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bartoostveen",
-        "repo": "infra",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -31,21 +15,6 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "nix-maid": {
-      "locked": {
-        "lastModified": 1775372244,
-        "narHash": "sha256-pLCCqY/0JC7QdWqyEyDEvGl63f9aS8zrFLVJW7gUMKI=",
-        "owner": "viperML",
-        "repo": "nix-maid",
-        "rev": "993d95a0a5b2f4b06faa022b32112b699ca3bbfd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "viperML",
-        "repo": "nix-maid",
         "type": "github"
       }
     },
@@ -152,30 +121,9 @@
         "type": "github"
       }
     },
-    "noctalia-greeter": {
-      "inputs": {
-        "nixpkgs": [
-          "puntbestanden",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781614784,
-        "narHash": "sha256-xP7OXSz9xWZyqqhoeBMxvOBiLXoh+pFCgH1kcwQlNr8=",
-        "owner": "noctalia-dev",
-        "repo": "noctalia-greeter",
-        "rev": "773e322418f904ffb9f0b1b4d378e7766bc1847e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "noctalia-dev",
-        "repo": "noctalia-greeter",
-        "type": "github"
-      }
-    },
     "puntbestanden": {
       "inputs": {
-        "bart": "bart",
+        "bart": [],
         "catppuccin": [],
         "copyparty": [],
         "deploy-rs": [],
@@ -188,7 +136,7 @@
         "ncro": [],
         "nix-cache-beacon": [],
         "nix-index-database": [],
-        "nix-maid": "nix-maid",
+        "nix-maid": [],
         "nixos-small": [],
         "nixpkgs": [
           "puntbestanden",
@@ -198,7 +146,7 @@
         "nixpkgs-patcher": "nixpkgs-patcher",
         "nixvim": [],
         "noctalia": [],
-        "noctalia-greeter": "noctalia-greeter",
+        "noctalia-greeter": [],
         "nur": [],
         "sops": [],
         "srvos": [],
