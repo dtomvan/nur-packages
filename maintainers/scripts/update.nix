@@ -90,7 +90,7 @@ let
         else
           [ ];
     in
-    packagesWithPathInner rootPath pkgs;
+    packagesWithPathInner rootPath self;
 
   # Recursively find all packages (derivations) in `pkgs` matching `cond` predicate.
   packagesWith = packagesWithPath [ ];
