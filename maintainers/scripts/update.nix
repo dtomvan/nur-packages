@@ -10,6 +10,7 @@
   commit ? null,
   skip-prompt ? null,
   order ? null,
+  nur-all ? null,
 }:
 let
   self = import ../../default.nix { };
@@ -160,6 +161,8 @@ let
       packagesWithUpdateScriptMatchingPredicate predicate pkgs
     else if maintainer != null then
       packagesWithUpdateScriptAndMaintainer maintainer pkgs
+    else if nur-all != null then
+      packagesWithUpdateScriptMatchingPredicate (_: _: true) pkgs
     else if path != null then
       packagesWithUpdateScript path pkgs
     else
