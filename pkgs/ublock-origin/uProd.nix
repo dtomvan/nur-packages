@@ -25,5 +25,8 @@ stdenv.mkDerivation {
     runHook postInstall
   '';
 
-  passthru.updateScript = unstableGitUpdater { branch = "gh-pages"; };
+  passthru.updateScript = unstableGitUpdater {
+    branch = "gh-pages";
+    hardcodeZeroVersion = true;
+  };
 }
