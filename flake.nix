@@ -2,17 +2,7 @@
   description = "Packages from my personal dotfiles";
 
   inputs = {
-    nixpkgs-patcher = {
-      url = "github:dtomvan/nixpkgs-patcher";
-
-      # disable all irrelevant inputs here since I only care about the
-      # "resulting" nixpkgs-patched output
-      inputs.nixpkgs.follows = "";
-      inputs.systems.follows = "";
-      inputs.flake-parts.follows = "";
-      inputs.nix-patcher.follows = "";
-    };
-    nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
