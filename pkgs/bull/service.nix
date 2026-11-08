@@ -1,7 +1,3 @@
-# Non-module dependencies (`importApply`)
-{ pkgs, ... }:
-
-# Service module
 {
   lib,
   config,
@@ -9,20 +5,15 @@
   ...
 }:
 let
-  inherit (builtins) concatStringsSep;
-
   inherit (lib)
-    escapeShellArg
-    getExe
+    getExe'
     mkOption
     optionalAttrs
-    singleton
     ;
 
   inherit (lib.types)
     package
     str
-    port
     ;
 
   cfg = config.bull;
@@ -38,20 +29,26 @@ in
       type = package;
     };
 
-    port = mkOption {
-      description = "Port to listen on.";
-      default = 3333;
-      type = port;
+    content = mkOption {
+      description = "Directory where the content goes.";
+      type = str;
     };
 
-    userId = mkOption {
-      description = "User ID to connect with.";
+    listen = mkOption {
+      description = "Address to listen on.";
+      default = "127.0.0.1:3333";
       type = str;
     };
   };
 
   config = {
-    process.argv = [ (getExe cfg.packge) ];
+    process.argv = [
+      (getExe' cfg.package "bull")
+      "--content"
+      cfg.content
+      "serve"
+      "--listen=127.0.0.1:${toString cfg.port}"
+    ];
   }
   // optionalAttrs (options ? systemd) {
     systemd.service = {
@@ -60,6 +57,7 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Restart = "always";
+        RequiresMountsFor = [ cfg.content ];
 
         # hardening BS
         DynamicUser = true;
