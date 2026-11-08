@@ -13,6 +13,7 @@ let
 
   inherit (lib.types)
     package
+    listOf
     str
     ;
 
@@ -27,6 +28,11 @@ in
       description = "Package to use for ghostunnel";
       defaultText = "The ghostunnel package that provided this module.";
       type = package;
+    };
+
+    extraArgs = mkOption {
+      description = "Extra arguments passed to bull";
+      type = listOf str;
     };
 
     content = mkOption {
@@ -48,7 +54,8 @@ in
       cfg.content
       "serve"
       "--listen=127.0.0.1:${toString cfg.port}"
-    ];
+    ]
+    ++ cfg.extraArgs;
   }
   // optionalAttrs (options ? systemd) {
     systemd.service = {
